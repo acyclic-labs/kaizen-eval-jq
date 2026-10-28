@@ -1,12 +1,6 @@
 name: CI
 on:
-  push:
-    branches:
-      - master
-    tags:
-      - "jq-*"
-  pull_request:
-
+  workflow_dispatch:
 jobs:
   linux:
     strategy:
