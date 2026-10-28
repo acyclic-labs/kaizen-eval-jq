@@ -93,7 +93,7 @@ jobs:
         # Only run tests for amd64 matching the CI machine arch
         if: ${{ matrix.arch == 'amd64' }}
         run: |
-          make check VERBOSE=yes
+          make check -j"$(nproc)" VERBOSE=yes
           git diff --exit-code
       - name: Upload Test Logs
         if: ${{ failure() }}
@@ -158,7 +158,7 @@ jobs:
           cp ./jq jq-${{ env.SUFFIX }}
       - name: Test
         run: |
-          make check VERBOSE=yes
+          make check -j"$(sysctl -n hw.logicalcpu)" VERBOSE=yes
           git diff --exit-code
       - name: Upload Test Logs
         if: ${{ failure() }}
@@ -237,7 +237,7 @@ jobs:
           cp ./jq.exe jq-${{ env.SUFFIX }}.exe
       - name: Test
         run: |
-          make check VERBOSE=yes
+          make check -j$(nproc) VERBOSE=yes
           git diff --exit-code
       - name: Upload Test Logs
         if: ${{ failure() }}
