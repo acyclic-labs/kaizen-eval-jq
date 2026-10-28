@@ -220,8 +220,10 @@ jobs:
             autoconf
             automake
             libtool
+          # Only the C compiler: the full toolchain group pulls in ~1.8 GB
+          # (python, lldb, llvm, tcl/tk, ...) on CLANGARM64.
           pacboy: >-
-            toolchain:p
+            cc:p
       - name: Build
         run: |
           autoreconf -i
